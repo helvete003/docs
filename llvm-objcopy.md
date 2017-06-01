@@ -22,28 +22,28 @@ these 4 projects.
 1. Use Case: Stripping debug information of an executable to a file  
    Who uses it: LLVM, Fuchsia, Chromium
 
-  ```sh
-  objcopy --only-keep-debug foo foo.debug
-  objcopy --strip-debug foo foo
-  ```
-  [Example use](https://github.com/llvm-mirror/llvm/blob/cd789d8cfe12aa374e66eafc748f4fc06e149ca7/cmake/modules/AddLLVM.cmake)
+   ```sh
+   objcopy --only-keep-debug foo foo.debug
+   objcopy --strip-debug foo foo
+   ```
 
-  When it is useful:  
-  This reduces the size of the file for distribution while maintaining the debug
-  information in a file for later use. Anyone distributing an executable in
-  anyway could benefit from this.
+   [Example use](https://github.com/llvm-mirror/llvm/blob/cd789d8cfe12aa374e66eafc748f4fc06e149ca7/cmake/modules/AddLLVM.cmake)
+   When it is useful:  
+   This reduces the size of the file for distribution while maintaining the debug
+   information in a file for later use. Anyone distributing an executable in
+   anyway could benefit from this.
 
 2. Use Case: Stripping debug information of a relocatable object to a file  
    Who uses it: None of the 4 projects considered
 
-  ```sh
-  objcopy --only-keep-debug foo.o foo.debug
-  objcopy --strip-debug foo.o foo.o
-  ```
+   ```sh
+   objcopy --only-keep-debug foo.o foo.debug
+   objcopy --strip-debug foo.o foo.o
+   ```
 
-  When it is useful:  
-  In distribution of an SDK in the form of an archive it would be nice to strip
-  this information. This allows debug information to be distributed separately.
+   When it is useful:  
+   In distribution of an SDK in the form of an archive it would be nice to strip
+   this information. This allows debug information to be distributed separately.
 
 3. Use Case: Stripping debug information of a shared library to a file  
    Who uses it: None of the 4 projects
@@ -72,33 +72,31 @@ these 4 projects.
 
 5. Use Case: “Complete stripping” an executable  
    Who uses it: None of the 4 projects
-
-  ```sh
-  eu-strip --strip-sections foo
-  ```
-
-  When is it useful:  
-  This is an extreme form of stripping that even strips the section headers
-  since they are not needed for loading. This is useful in the same contexts as
-  stripping but some tools and dynamic linkers may be confused by it. This is
-  possibly only valid on ELF unlike general stripping which is a valid option on
-  multiple platforms.
+   ```sh
+   eu-strip --strip-sections foo
+   ```
+   When is it useful:  
+   This is an extreme form of stripping that even strips the section headers
+   since they are not needed for loading. This is useful in the same contexts as
+   stripping but some tools and dynamic linkers may be confused by it. This is
+   possibly only valid on ELF unlike general stripping which is a valid option on
+   multiple platforms.
 
 6. Use Case: DWARF fission  
    Who uses it: Clang, Fuchsia, Chromium
 
-  ```sh
-  objcopy --extract-dwo foo foo.debug
-  objcopy --strip-dwo foo foo
-  ```
+   ```sh
+   objcopy --extract-dwo foo foo.debug
+   objcopy --strip-dwo foo foo
+   ```
 
-  [Example use 1](https://github.com/llvm-mirror/clang/blob/3efd04e48004628cfaffead00ecb1c206b0b6cb2/lib/Driver/ToolChains/CommonArgs.cpp)
-  [Example use 2](https://github.com/llvm-mirror/clang/blob/a0badfbffbee71c2c757d580fc852d2124dadc5a/test/Driver/split-debug.s)
+   [Example use  1](https://github.com/llvm-mirror/clang/blob/3efd04e48004628cfaffead00ecb1c206b0b6cb2/lib/Driver/ToolChains/CommonArgs.cpp)
+   [Example use 2](https://github.com/llvm-mirror/clang/blob/a0badfbffbee71c2c757d580fc852d2124dadc5a/test/Driver/split-debug.s)
 
-  When is it useful:  
-  DWARF fission can be used to speed up large builds. In some cases builds can
-  be too large to be handled and DWARF fission makes this manageable. DWARF
-  fission is useful in almost any project of sufficient size.
+   When is it useful:  
+   DWARF fission can be used to speed up large builds. In some cases builds can
+   be too large to be handled and DWARF fission makes this manageable. DWARF
+   fission is useful in almost any project of sufficient size.
 
 7. Use Case: Converting an executable to binary  
    Who uses it: Fuchsia
@@ -115,30 +113,30 @@ these 4 projects.
 8. Use Case: Adding a gdb index  
    Who uses it: Chromium
 
-  ```sh
-  gdb -batch foo -ex "save gdb-index dir" -ex quit
-  objcopy --add-section .gdb_index="dir/foo.gdb-index" \
+   ```sh
+   gdb -batch foo -ex "save gdb-index dir" -ex quit
+   objcopy --add-section .gdb_index="dir/foo.gdb-index" \
            --set-section-flags .gdb_index=readonly foo foo
-  ```
+   ```
 
-  [Example use](https://cs.chromium.org/chromium/src/build/gdb-add-index?type=cs&q=objcopy&l=71)
+   [Example use](https://cs.chromium.org/chromium/src/build/gdb-add-index?type=cs&q=objcopy&l=71)
 
-  When is it useful:  
-  Adding a gdb index reduces startup time for debugging an application. Any
-  sufficiently large program with a sufficiently large amount of debug
-  information can potentially benefit from this.
+   When is it useful:  
+   Adding a gdb index reduces startup time for debugging an application. Any
+   sufficiently large program with a sufficiently large amount of debug
+   information can potentially benefit from this.
 
 9. Use Case: Converting between formats  
    Who uses it: Fuchsia (only in Magenta GCC build)
 
-  ```sh
-  objcopy --target=pei-x86-64 magenta.elf megenta.pe
-  ```
+   ```sh
+   objcopy --target=pei-x86-64 magenta.elf megenta.pe
+   ```
 
-  [Example use](https://fuchsia.googlesource.com/magenta/+/master/bootloader/build.mk#97)
+   [Example use](https://fuchsia.googlesource.com/magenta/+/master/bootloader/build.mk#97)
 
-  When is it useful:  
-  This is primarily useful when you can’t directly target a needed format.
+   When is it useful:  
+   This is primarily useful when you can’t directly target a needed format.
 
 10. Use Case: Removing symbols not needed for relocation  
     Who uses it: Chromium
@@ -159,8 +157,8 @@ these 4 projects.
     objcopy --discard-all foo foo
     ```
 
-   [Example use](https://github.com/llvm-mirror/llvm/blob/cd789d8cfe12aa374e66eafc748f4fc06e149ca7/cmake/modules/AddLLVM.cmake)
-   (hidden in definition of “strip_command” using strip instead of objcopy and
+    [Example use](https://github.com/llvm-mirror/llvm/blob/cd789d8cfe12aa374e66eafc748f4fc06e149ca7/cmake/modules/AddLLVM.cmake)
+    (hidden in definition of “strip_command” using strip instead of objcopy and
     using -x instead of --discard-all)
 
     When is it useful:  
@@ -169,9 +167,9 @@ these 4 projects.
 12. Use Case: Removing a specific unwanted section  
     Who uses it: LLVM
 
-      ```sh
-      objcopy --remove-section=.debug_aranges foo foo
-      ```
+    ```sh
+    objcopy --remove-section=.debug_aranges foo foo
+    ```
 
     [Example use](https://github.com/llvm-mirror/llvm/blob/93e6e5414ded14bcbb233baaaa5567132fee9a0c/test/DebugInfo/Inputs/fission-ranges.cc)
 

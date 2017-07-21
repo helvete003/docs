@@ -44,7 +44,7 @@ This has some interesting implications:
 
 - There is no global "root" namespace.
 - There is no concept of "running in a chroot-ed environment" because every
-  component effectively has its own private "root".
+  component [effectively has its own private "root"](dotdot.md).
 - Components receive namespaces which are tailored to their specific needs.
 - Object paths may not be meaningful across namespace boundaries.
 - A process may have access to several distinct namespaces at once.
@@ -195,7 +195,8 @@ components running on Fuchsia.
 
 The precise contents and organization of a component's namespace varies
 greatly depending on the component's role, type, identity, scope,
-relation to other components, and rights.
+relation to other components, and rights. See [sandboxing.md] for information
+about how namespaces are used to create sandboxes for applications.
 
 _For more information about the namespace your component can expect to
 receive from its environment, please consult the documentation related to

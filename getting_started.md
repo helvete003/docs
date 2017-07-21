@@ -156,7 +156,7 @@ Note: Networking support within QEMU is only available under x86_64.
 First, [configure](https://fuchsia.googlesource.com/magenta/+/master/docs/qemu.md#Enabling-Networking-under-QEMU-x86_64-only)
 a virtual interface for QEMU's use.
 
-Once this is done you can add the -N and -u flags to `frun`:
+Once this is done you can add the `-N` and `-u` flags to `frun`:
 
 ```
 frun -N -u $FUCHSIA_SCRIPTS_DIR/start-dhcp-server.sh
@@ -224,8 +224,7 @@ box and typing "moterm"
 
 ## Additional helpful documents
 
-* Using Magenta - copying files, network booting, log viewing, and more are [here]
-(https://fuchsia.googlesource.com/magenta/+/master/docs/getting_started.md#Copying-files-to-and-from-Magenta)
+* Using Magenta - copying files, network booting, log viewing, and more are [here](https://fuchsia.googlesource.com/magenta/+/master/docs/getting_started.md#Copying-files-to-and-from-Magenta)
 * [Fuchsia documentation](https://fuchsia.googlesource.com/docs) hub
 * Build [Fuchsia's toolchain](building_toolchain.md)
 * More about the [build commands](build_system.md) called under-the-hood by `fbuild`

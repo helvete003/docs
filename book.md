@@ -29,6 +29,7 @@ Sections will be populated over time.
  - Device, user, and story runners
  - Components
  - [Namespaces](namespaces.md)
+ - [Sandboxing](sandboxing.md)
  - [Story][framework-story]
  - [Module][framework-module]
  - [Agent][framework-agent]
@@ -36,10 +37,10 @@ Sections will be populated over time.
 
 # Storage
 
- - Block devices
- - File systems
+ - [Block devices](block_devices.md)
+ - [File systems](filesystems.md)
  - Directory hierarchy
- - Ledger
+ - [Ledger](https://fuchsia.googlesource.com/ledger/+/HEAD/README.md)
  - Document store
  - Application cache
 

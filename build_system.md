@@ -3,18 +3,18 @@
 These are notes on using the `gen.py` script and `ninja` directly for builds,
 and the `scripts/run-magenta-*` scripts to launch QEMU.
 
-You can alternatively use the [standard build instructions](getting_started.md)
+You can alternatively use the [standard build instructions](https://fuchsia.googlesource.com/docs/+/master/getting_started.md#Setup-Build-Environment)
 using commands defined in `env.sh` instead.
 
 ### Build Magenta and the sysroot
 
 First, you need to
-[build the Magenta kernel](https://fuchsia.googlesource.com/magenta/+/master/README.md)
+[build the Magenta kernel](https://fuchsia.googlesource.com/magenta/+/master/docs/getting_started.md)
 and the sysroot:
 
 ```
 (cd magenta; make -j32 magenta-pc-x86-64)
-./scripts/build-sysroot.sh
+./scripts/build-magenta.sh
 ```
 
 ### Build Fuchsia
@@ -78,7 +78,20 @@ the value of the `-x` parameter in Magenta's start command script, for example:
 ./scripts/run-magenta-arm64 -x out/debug-aarch64/user.bootfs -m 2048
 ```
 
-See the [standard build instructions](getting_started.md) for other flags you
+See the [standard build instructions](https://fuchsia.googlesource.com/docs/+/master/getting_started.md#Boot-from-QEMU) for other flags you
 can pass to QEMU.
 
 [magenta]: https://fuchsia.googlesource.com/magenta/+/HEAD/docs/getting_started.md "Magenta"
+
+
+### Running on ARM Hardware
+
+To build a fuchsia image for a particular ARM hardware target, you must also
+provide the magenta project name for that particular target to gen.py via the
+magenta_project argument. For example, to build a fuchsia image for the
+Raspberry Pi 3, you might invoke gen.py as follows:
+
+```
+./packages/gn/gen.py --magenta_project=magenta-rpi3-arm64 --target_cpu=aarch64
+./buildtools/ninja -C out/debug-aarch64
+```

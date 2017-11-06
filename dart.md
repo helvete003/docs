@@ -67,6 +67,14 @@ dependencies:
 3. add a reference to the file in `//scripts/dart/update_3p_packages.py`
 4. run that script
 
+Create a separate commit to permanently add your third-party dependency to
+the source tree:
+```
+$ pushd third_party/dart-pkg/pub
+$ git add ./your_package/ # Be sure to 'git reset' any .package files, etc.
+$ git commit -m "Add <your_package> to dart-pkg/pub"
+$ jiri upload
+```
 
 ## Analysis
 
